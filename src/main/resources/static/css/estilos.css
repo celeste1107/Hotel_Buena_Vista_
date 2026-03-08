@@ -37,6 +37,12 @@ section {
     bottom: 20px;
     padding: 10px;
     overflow-y: scroll;
+    
+}
+section {
+  background: url('ruta/a/tu/foto-hotel.jpg') no-repeat center center;
+  background-size: cover;
+  color: white;
 }
 
 footer{

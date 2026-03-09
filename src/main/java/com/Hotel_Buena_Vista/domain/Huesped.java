@@ -4,8 +4,15 @@
  */
 package com.Hotel_Buena_Vista.domain;
 
-import jakarta.persistence.*;
 import java.util.List;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Huesped {
@@ -22,11 +29,11 @@ public class Huesped {
 
     @Column(nullable = false, unique = true, length = 100)
     private String email; // email VARCHAR(100) UNIQUE NOT NULL
-    
+
     @OneToMany(mappedBy = "huesped", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reservas> reservas; // relación con reservas
 
-    public Huesped(Long id, String nombre, String apellido, String email, List reservas) {
+    public Huesped(Long id, String nombre, String apellido, String email, List<Reservas> reservas) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -66,14 +73,12 @@ public class Huesped {
         this.email = email;
     }
 
-    public List getReservas() {
+    public List<Reservas> getReservas() {
         return reservas;
     }
 
-    public void setReservas(List reservas) {
+    public void setReservas(List<Reservas> reservas) {
         this.reservas = reservas;
     }
-    
-    
-    
-}    
+
+}

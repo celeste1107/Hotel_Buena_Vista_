@@ -6,8 +6,356 @@
     <title>Hotel Buena Vista — Inicio</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../static/css/estilos.css">
-    
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ──────────────────────────────────────
+           HERO
+        ────────────────────────────────────── */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background: var(--oscuro);
+        }
+        .hero-bg {
+            position: absolute;
+            inset: -10%;
+            background:
+                linear-gradient(160deg, rgba(0,0,0,.70) 0%, rgba(0,0,0,.28) 55%, rgba(0,0,0,.72) 100%),
+                url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1800&auto=format&fit=crop') center/cover no-repeat;
+            animation: slowZoom 20s ease-in-out infinite alternate;
+            will-change: transform;
+        }
+        .hero-content { position: relative; z-index: 3; }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3.2rem, 7.5vw, 7rem);
+            font-weight: 300;
+            line-height: 1.0;
+            color: #fff;
+            margin-bottom: 1.75rem;
+        }
+        .hero-title em { font-style: italic; color: var(--oro-claro); }
+
+        .hero-desc {
+            font-size: 1rem;
+            font-weight: 300;
+            color: rgba(255,255,255,.7);
+            max-width: 460px;
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+        }
+
+        /* ── Booking panel ── */
+        .booking-panel {
+            position: absolute;
+            bottom: 0; left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            width: min(96%, 1020px);
+            background: rgba(13,13,13,.9);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(201,168,76,.22);
+            border-bottom: none;
+            padding: 1.6rem 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            gap: 1rem;
+        }
+        .bp-field { flex: 1 1 150px; }
+        .bp-field label {
+            font-size: .63rem;
+            letter-spacing: .25em;
+            text-transform: uppercase;
+            color: var(--oro);
+            display: block;
+            margin-bottom: .4rem;
+        }
+        .bp-field input,
+        .bp-field select {
+            width: 100%;
+            background: rgba(255,255,255,.06);
+            border: 1px solid rgba(255,255,255,.13);
+            color: #fff;
+            font-family: 'Jost', sans-serif;
+            font-size: .88rem;
+            padding: .58rem .9rem;
+            outline: none;
+            transition: border-color .25s;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        .bp-field input:focus,
+        .bp-field select:focus { border-color: var(--oro); }
+        .bp-field select option { background: #111; }
+        .bp-select-wrap { position: relative; }
+        .bp-select-wrap::after {
+            content: '▾';
+            position: absolute;
+            right: .8rem; top: 50%;
+            transform: translateY(-50%);
+            color: var(--oro);
+            pointer-events: none;
+            font-size: .75rem;
+        }
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(.6) sepia(1) saturate(2) hue-rotate(5deg);
+            cursor: pointer;
+        }
+        .bp-btn {
+            font-family: 'Jost', sans-serif;
+            font-size: .76rem;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            background: var(--oro);
+            color: var(--oscuro);
+            border: none;
+            padding: .7rem 2rem;
+            cursor: pointer;
+            white-space: nowrap;
+            flex-shrink: 0;
+            transition: background .3s, transform .2s;
+        }
+        .bp-btn:hover { background: var(--oro-claro); transform: translateY(-2px); }
+
+        /* ── Scroll hint ── */
+        .scroll-hint {
+            position: absolute;
+            bottom: 105px; right: 2.5rem;
+            z-index: 4;
+            display: flex; flex-direction: column; align-items: center;
+            gap: .5rem;
+        }
+        .scroll-hint span {
+            font-size: .58rem;
+            letter-spacing: .32em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.38);
+            writing-mode: vertical-rl;
+        }
+        .scroll-line {
+            width: 1px; height: 48px;
+            background: linear-gradient(to bottom, rgba(201,168,76,.75), transparent);
+            animation: scrollPulse 2.2s 1.5s infinite;
+        }
+        @keyframes scrollPulse {
+            0%,100% { opacity: 1; transform: scaleY(1); }
+            50%      { opacity: .35; transform: scaleY(.55); }
+        }
+
+        /* ── Sección Habitaciones ── */
+        .rooms-section {
+            background: var(--crema);
+            padding: 7rem 0 5rem;
+        }
+        .rooms-section .section-eyebrow {
+            font-size: .68rem;
+            letter-spacing: .35em;
+            text-transform: uppercase;
+            color: var(--oro);
+            display: flex; align-items: center; gap: .7rem;
+            margin-bottom: 1rem;
+        }
+        .rooms-section .section-eyebrow::before {
+            content: ''; display: block;
+            width: 36px; height: 1px;
+            background: var(--oro);
+        }
+        .rooms-section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.4rem, 4vw, 3.8rem);
+            font-weight: 300;
+            color: var(--oscuro);
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+        .rooms-section h2 em { font-style: italic; color: #8a6e2e; }
+        .rooms-section .lead-text {
+            font-size: .95rem;
+            color: #555;
+            font-weight: 300;
+            line-height: 1.75;
+            max-width: 540px;
+            margin-bottom: 3.5rem;
+        }
+        .room-card {
+            background: #fff;
+            border: 1px solid rgba(0,0,0,.06);
+            overflow: hidden;
+            transition: box-shadow .35s, transform .3s;
+        }
+        .room-card:hover {
+            box-shadow: 0 20px 50px rgba(0,0,0,.12);
+            transform: translateY(-6px);
+        }
+        .room-card-img {
+            height: 240px;
+            object-fit: cover;
+            width: 100%;
+            display: block;
+        }
+        .room-card-body { padding: 1.75rem; }
+        .room-tag {
+            font-size: .6rem;
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            color: var(--oro);
+            margin-bottom: .6rem;
+            display: block;
+        }
+        .room-card-body h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.65rem;
+            font-weight: 400;
+            color: var(--oscuro);
+            margin-bottom: .5rem;
+        }
+        .room-card-body p {
+            font-size: .88rem;
+            color: #666;
+            line-height: 1.65;
+            margin-bottom: 1.25rem;
+        }
+        .room-features {
+            display: flex; gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+        .room-feat {
+            font-size: .7rem;
+            letter-spacing: .1em;
+            color: #888;
+            display: flex; align-items: center; gap: .35rem;
+        }
+        .room-feat i { color: var(--oro); }
+        .room-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 300;
+            color: var(--oscuro);
+        }
+        .room-price span { font-size: .75rem; font-family: 'Jost', sans-serif; color: #999; margin-left: .2rem; }
+        .btn-dark-sm {
+            font-family: 'Jost', sans-serif;
+            font-size: .7rem;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            background: var(--oscuro);
+            color: #fff;
+            border: none;
+            padding: .7rem 1.5rem;
+            transition: background .3s;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-dark-sm:hover { background: #2a2a2a; color: var(--oro); }
+
+        /* ── Sección Experiencias ── */
+        .exp-section {
+            background: var(--oscuro);
+            padding: 7rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .exp-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--oro), transparent);
+        }
+        .exp-section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.4rem, 4vw, 3.8rem);
+            font-weight: 300;
+            color: #fff;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+        .exp-section h2 em { font-style: italic; color: var(--oro-claro); }
+        .exp-card {
+            border: 1px solid rgba(201,168,76,.18);
+            padding: 2.5rem 2rem;
+            transition: border-color .3s, background .3s;
+        }
+        .exp-card:hover {
+            border-color: rgba(201,168,76,.55);
+            background: rgba(201,168,76,.04);
+        }
+        .exp-card i {
+            font-size: 1.6rem;
+            color: var(--oro);
+            margin-bottom: 1.25rem;
+            display: block;
+        }
+        .exp-card h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #fff;
+            margin-bottom: .6rem;
+        }
+        .exp-card p {
+            font-size: .88rem;
+            color: rgba(255,255,255,.5);
+            line-height: 1.7;
+        }
+
+        /* ── Footer ── */
+        .site-footer {
+            background: #080808;
+            border-top: 1px solid rgba(201,168,76,.15);
+            padding: 3.5rem 0 2rem;
+        }
+        .footer-brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 300;
+            color: #fff;
+        }
+        .footer-brand em { font-style: italic; color: var(--oro-claro); }
+        .footer-tagline {
+            font-size: .72rem;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.3);
+            margin-top: .3rem;
+        }
+        .footer-col h6 {
+            font-size: .65rem;
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            color: var(--oro);
+            margin-bottom: 1.1rem;
+        }
+        .footer-col a {
+            display: block;
+            font-size: .85rem;
+            color: rgba(255,255,255,.42);
+            text-decoration: none;
+            margin-bottom: .55rem;
+            transition: color .25s;
+        }
+        .footer-col a:hover { color: var(--oro); }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,.06);
+            padding-top: 1.5rem;
+            margin-top: 2.5rem;
+            font-size: .72rem;
+            color: rgba(255,255,255,.22);
+            letter-spacing: .08em;
+        }
+
+        @media (max-width: 768px) {
+            .booking-panel { position: relative; transform: none; left: auto; border-bottom: 1px solid rgba(201,168,76,.22); }
+            .scroll-hint { display: none; }
+        }
+    </style>
 </head>
 <body>
 

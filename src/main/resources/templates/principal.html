@@ -7,6 +7,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../static/css/estilos.css" type="text/css"/>
+    <link rel="stylesheet" href="../static/css/estilos.css" type="text/css">
+
+
     <style>
         /* ──────────────────────────────────────
            HERO
@@ -297,12 +301,13 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.5rem;
             font-weight: 400;
-            color: #fff;
+            color: #222;
             margin-bottom: .6rem;
         }
+
         .exp-card p {
             font-size: .88rem;
-            color: rgba(255,255,255,.5);
+            color: #555;
             line-height: 1.7;
         }
 
@@ -364,13 +369,13 @@
 
 <!-- ── NAV ── -->
 <nav class="site-nav anim-1">
-    <a href="../templates/principal.html" class="nav-brand">Hotel <em>Buena Vista</em></a>
+    <a href="/principal" class="nav-brand">Hotel <em>Buena Vista</em></a>
     <div class="nav-links">
         <a href="#">Habitaciones</a>
         <a href="#">Experiencias</a>
         <a href="#">Galería</a>
         <a href="#">Contacto</a>
-        <a href="../templates/inicioSeccion.html" class="nav-cta">Iniciar Sesión</a>
+        <a href="/inicioSeccion" class="nav-cta">Iniciar Sesión</a>
     </div>
 </nav>
 
@@ -628,8 +633,8 @@
         <div class="footer-bottom d-flex justify-content-between flex-wrap gap-2">
             <span>© 2025 Hotel Buena Vista. Todos los derechos reservados.</span>
             <span>
-                <a href="../templates/inicioSeccion.html" class="link-subtle me-3">Iniciar Sesión</a>
-                <a href="../templates/registro.html" class="link-subtle">Registrarse</a>
+                <a href="/inicioSeccion" class="link-subtle me-3">Iniciar Sesión</a>
+                <a href="/registro" class="link-subtle">Registrarse</a>
             </span>
         </div>
     </div>

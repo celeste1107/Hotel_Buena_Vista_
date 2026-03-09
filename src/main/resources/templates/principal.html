@@ -1,31 +1,308 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Principal - Hotel Buena Vista</title>
     <meta charset="UTF-8"/>
-    <link rel="stylesheet" href="/css/estilos.css">
- 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Hotel Buena Vista — Inicio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/estilos.css">
+    
 </head>
 <body>
-    <header>
-        <nav>  
-            <ul class="nav-menu">
-                <li class="nav-menu" > <a href="/principal.html">Sección Principal</a> </li>
-                <li class="nav-menu"> <a href="/inicioSeccion.html">Inicio Seccion</a> </li>
-                <li class="nav-menu"> <a href="/registro.html">Registrarse</a> </li>
-                <li class="nav-menu"> <a href="/husped.html">Seccion de Huesped</a> </li>
-                <li> <a href="/reserva.html">Seccion de Reserva</a> </li>              
-            </ul>
-        </nav>
-    </header>
-    
-    <aside>
-        <h1>Bienvenido al Hotel Buena Vista</h1>
-        <p>Los mejores precios y Comodidad la encuentra aqui </p>
-    </aside>
-    
-    <footer>
-        Todos los Derechos Reservados Hotel Buena Vista 2026 &COPY;
-    </footer>
+
+<!-- Acento lateral dorado -->
+<div class="side-accent"></div>
+
+<!-- ── NAV ── -->
+<nav class="site-nav anim-1">
+    <a href="index.html" class="nav-brand">Hotel <em>Buena Vista</em></a>
+    <div class="nav-links">
+        <a href="#">Habitaciones</a>
+        <a href="#">Experiencias</a>
+        <a href="#">Galería</a>
+        <a href="#">Contacto</a>
+        <a href="login.html" class="nav-cta">Iniciar Sesión</a>
+    </div>
+</nav>
+
+<!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
+<section class="hero">
+    <div class="hero-bg"></div>
+
+    <div class="container hero-content py-5">
+        <div class="row">
+            <div class="col-lg-8 col-xl-7">
+
+                <div class="eyebrow anim-1">
+                    <span>Lujo &amp; Confort</span>
+                    <span class="stars">★★★★★</span>
+                </div>
+
+                <h1 class="hero-title anim-2">
+                    Hotel<br><em>Buena Vista</em>
+                </h1>
+
+                <p class="hero-desc anim-3">
+                    Tu refugio de lujo en el corazón del paisaje costarricense.
+                    Vistas únicas, gastronomía de autor y experiencias que perduran para siempre.
+                </p>
+
+                <div class="d-flex flex-wrap gap-3 anim-4">
+                    <a href="#habitaciones" class="btn-oro">Reservar Ahora</a>
+                    <a href="#habitaciones" class="btn-ghost">
+                        <i class="bi bi-grid me-2"></i>Ver Habitaciones
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Panel reserva rápida -->
+    <div class="booking-panel anim-5">
+        <div class="bp-field">
+            <label for="checkin">Check-in</label>
+            <input type="date" id="checkin" name="checkin"/>
+        </div>
+        <div class="bp-field">
+            <label for="checkout">Check-out</label>
+            <input type="date" id="checkout" name="checkout"/>
+        </div>
+        <div class="bp-field">
+            <label for="huespedes">Huéspedes</label>
+            <div class="bp-select-wrap">
+                <select id="huespedes">
+                    <option>1 Adulto</option>
+                    <option selected>2 Adultos</option>
+                    <option>2 Adultos + 1 Niño</option>
+                    <option>2 Adultos + 2 Niños</option>
+                </select>
+            </div>
+        </div>
+        <div class="bp-field">
+            <label for="tipo">Habitación</label>
+            <div class="bp-select-wrap">
+                <select id="tipo">
+                    <option>Estándar</option>
+                    <option>Suite Deluxe</option>
+                    <option>Vista Mar</option>
+                    <option>Penthouse</option>
+                </select>
+            </div>
+        </div>
+        <button class="bp-btn">
+            <i class="bi bi-search me-2"></i>Consultar
+        </button>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="scroll-hint anim-5">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     HABITACIONES
+══════════════════════════════════════ -->
+<section class="rooms-section" id="habitaciones">
+    <div class="container">
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="section-eyebrow">Nuestras Habitaciones</div>
+            </div>
+            <div class="col-lg-6">
+                <h2>Espacios <em>diseñados</em> para el descanso</h2>
+            </div>
+            <div class="col-lg-5 offset-lg-1">
+                <p class="lead-text">
+                    Cada habitación es una experiencia en sí misma. Materiales nobles,
+                    tecnología invisible y vistas que quitan el aliento.
+                </p>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <!-- Card 1 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="room-card">
+                    <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&auto=format&fit=crop"
+                         alt="Habitación Estándar" class="room-card-img">
+                    <div class="room-card-body">
+                        <span class="room-tag">Categoría · Estándar</span>
+                        <h3>Vista Jardín</h3>
+                        <p>Espaciosa y luminosa, con terraza privada al jardín tropical y todas las comodidades.</p>
+                        <div class="room-features">
+                            <span class="room-feat"><i class="bi bi-people"></i> 2 pers.</span>
+                            <span class="room-feat"><i class="bi bi-rulers"></i> 35 m²</span>
+                            <span class="room-feat"><i class="bi bi-wifi"></i> WiFi</span>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="room-price">$189<span>/noche</span></div>
+                            <a href="#" class="btn-dark-sm">Reservar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="room-card">
+                    <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&auto=format&fit=crop"
+                         alt="Suite Deluxe" class="room-card-img">
+                    <div class="room-card-body">
+                        <span class="room-tag">Categoría · Deluxe</span>
+                        <h3>Suite Deluxe</h3>
+                        <p>Sala de estar independiente, bañera de mármol y vistas panorámicas al valle.</p>
+                        <div class="room-features">
+                            <span class="room-feat"><i class="bi bi-people"></i> 2 pers.</span>
+                            <span class="room-feat"><i class="bi bi-rulers"></i> 58 m²</span>
+                            <span class="room-feat"><i class="bi bi-cup-hot"></i> Desayuno</span>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="room-price">$340<span>/noche</span></div>
+                            <a href="#" class="btn-dark-sm">Reservar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="room-card">
+                    <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=800&auto=format&fit=crop"
+                         alt="Penthouse" class="room-card-img">
+                    <div class="room-card-body">
+                        <span class="room-tag">Categoría · Premium</span>
+                        <h3>Penthouse</h3>
+                        <p>Piso exclusivo con terraza infinity, cocina privada y servicio de mayordomo 24/7.</p>
+                        <div class="room-features">
+                            <span class="room-feat"><i class="bi bi-people"></i> 4 pers.</span>
+                            <span class="room-feat"><i class="bi bi-rulers"></i> 120 m²</span>
+                            <span class="room-feat"><i class="bi bi-star"></i> Todo incluido</span>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="room-price">$780<span>/noche</span></div>
+                            <a href="#" class="btn-dark-sm">Reservar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     EXPERIENCIAS
+══════════════════════════════════════ -->
+<section class="exp-section">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-5">
+                <div class="eyebrow anim-1">Más que hospedaje</div>
+                <h2>Experiencias <em>únicas</em></h2>
+            </div>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="exp-card">
+                    <i class="bi bi-tree"></i>
+                    <h4>Tours Naturaleza</h4>
+                    <p>Caminatas guiadas por senderos privados con fauna y flora endémica costarricense.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="exp-card">
+                    <i class="bi bi-cup-straw"></i>
+                    <h4>Gastronomía</h4>
+                    <p>Restaurante de autor con productos orgánicos del huerto propio y maridaje exclusivo.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="exp-card">
+                    <i class="bi bi-droplet"></i>
+                    <h4>Spa & Bienestar</h4>
+                    <p>Rituales ancestrales con ingredientes locales. Masajes, baños de lodo y meditación.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="exp-card">
+                    <i class="bi bi-camera"></i>
+                    <h4>Fotografía</h4>
+                    <p>Sesiones fotográficas en los rincones más espectaculares del hotel y sus alrededores.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     FOOTER
+══════════════════════════════════════ -->
+<footer class="site-footer">
+    <div class="container">
+        <div class="row g-4 mb-3">
+            <div class="col-lg-4">
+                <div class="footer-brand">Hotel <em>Buena Vista</em></div>
+                <div class="footer-tagline">Costa Rica · Desde 1998</div>
+                <p class="mt-3" style="font-size:.85rem;color:rgba(255,255,255,.35);line-height:1.7;">
+                    Un legado de hospitalidad de lujo en el corazón de Costa Rica. Donde la naturaleza y el confort se encuentran.
+                </p>
+            </div>
+            <div class="col-6 col-lg-2 offset-lg-1">
+                <div class="footer-col">
+                    <h6>El Hotel</h6>
+                    <a href="#">Sobre Nosotros</a>
+                    <a href="#">Habitaciones</a>
+                    <a href="#">Galería</a>
+                    <a href="#">Blog</a>
+                </div>
+            </div>
+            <div class="col-6 col-lg-2">
+                <div class="footer-col">
+                    <h6>Servicios</h6>
+                    <a href="#">Spa</a>
+                    <a href="#">Restaurante</a>
+                    <a href="#">Eventos</a>
+                    <a href="#">Tours</a>
+                </div>
+            </div>
+            <div class="col-6 col-lg-2">
+                <div class="footer-col">
+                    <h6>Contacto</h6>
+                    <a href="#">+506 2234-5678</a>
+                    <a href="#">reservas@buenavista.cr</a>
+                    <a href="#">Heredia, Costa Rica</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom d-flex justify-content-between flex-wrap gap-2">
+            <span>© 2025 Hotel Buena Vista. Todos los derechos reservados.</span>
+            <span>
+                <a href="login.html" class="link-subtle me-3">Iniciar Sesión</a>
+                <a href="register.html" class="link-subtle">Registrarse</a>
+            </span>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    const today = new Date().toISOString().split('T')[0];
+    const ci = document.getElementById('checkin');
+    const co = document.getElementById('checkout');
+    ci.min = co.min = today;
+    ci.value = today;
+    const tom = new Date(); tom.setDate(tom.getDate()+1);
+    co.value = tom.toISOString().split('T')[0];
+    ci.addEventListener('change', e => {
+        co.min = e.target.value;
+        if (co.value <= e.target.value) {
+            const d = new Date(e.target.value); d.setDate(d.getDate()+1);
+            co.value = d.toISOString().split('T')[0];
+        }
+    });
+</script>
 </body>
 </html>

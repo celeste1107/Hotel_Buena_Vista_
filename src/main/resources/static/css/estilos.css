@@ -1,98 +1,221 @@
-body{
-    background-color: #FAFAFA;
-    font-family: Arial, sans-serif;
-    margin:0;
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
+/* ═══════════════════════════════════════════
+   Hotel Buena Vista — Shared Styles
+   ═══════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap');
+
+:root {
+    --oro:       #c9a84c;
+    --oro-claro: #e8d5a3;
+    --oscuro:    #0d0d0d;
+    --gris:      #1a1a1a;
+    --crema:     #f9f5ee;
+    --texto:     rgba(255,255,255,.72);
 }
 
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-header{
-    position: fixed;
-    background-color:#1F3A5F;
-    top: 0;
-    color:white;
-    left: 0;
-    width: 100%;
-    height: 90px;
-    padding: 10px;
+body {
+    font-family: 'Jost', sans-serif;
+    background: var(--oscuro);
+    color: #fff;
+    -webkit-font-smoothing: antialiased;
 }
 
-aside {
-    position: fixed;  
-    background-color: #DFF5F0;
-    top: 110px;
-    left: 0;
-    width: 20%;
-    bottom: 20px;
-    padding: 10px;
-}
-section {
-    position: fixed;  
-    background-color: #F0F8FF;
-    top: 110px;
-    left: 20%;
-    width: 80%;
-    bottom: 20px;
-    padding: 10px;
-    overflow-y: scroll;
-    
-}
-section {
-  background: url('ruta/a/tu/foto-hotel.jpg') no-repeat center center;
-  background-size: cover;
-  color: white;
-}
+/* ── Tipografía ── */
+.font-display { font-family: 'Cormorant Garamond', serif; }
 
-footer{
-    position: fixed;  
-    background-color:#1B4332;
-    color:white;
-    left: 0;
-    width: 100%;
-    height: 20px;
-    bottom: 0;
-    text-align:center; 
-}
+/* ── Colores ── */
+.text-oro   { color: var(--oro); }
+.text-crema { color: var(--crema); }
 
-nav {
-   display: flex;
-   justify-content: space-between;
-   margin: 0 10px;
-}
-.logo{
-    font-size:30px;
-    font-weight:bold;
-    font-family:cursive;
-}
-
-.nav-link {
+/* ── Botones ── */
+.btn-oro {
+    font-family: 'Jost', sans-serif;
+    font-size: .78rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    background: var(--oro);
+    color: var(--oscuro);
+    border: none;
+    padding: .9rem 2.4rem;
+    transition: background .3s, transform .2s;
+    cursor: pointer;
+    display: inline-block;
     text-decoration: none;
-    color: white;
+}
+.btn-oro:hover { background: var(--oro-claro); color: var(--oscuro); transform: translateY(-2px); }
+
+.btn-ghost {
+    font-family: 'Jost', sans-serif;
+    font-size: .78rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,.35);
+    padding: .9rem 2.4rem;
+    transition: border-color .3s, color .3s, transform .2s;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+}
+.btn-ghost:hover { border-color: var(--oro); color: var(--oro); transform: translateY(-2px); }
+
+/* ── Inputs ── */
+.field-group { margin-bottom: 1.4rem; }
+.field-group label {
+    font-size: .65rem;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--oro);
+    display: block;
+    margin-bottom: .45rem;
+}
+.field-group input,
+.field-group select {
+    width: 100%;
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.12);
+    color: #fff;
+    font-family: 'Jost', sans-serif;
+    font-size: .92rem;
+    padding: .7rem 1rem;
+    outline: none;
+    transition: border-color .25s, background .25s;
+    -webkit-appearance: none;
+    appearance: none;
+}
+.field-group input::placeholder { color: rgba(255,255,255,.28); }
+.field-group input:focus,
+.field-group select:focus {
+    border-color: var(--oro);
+    background: rgba(201,168,76,.06);
+}
+.field-group select option { background: #1a1a1a; }
+
+/* ── Línea dorada decorativa ── */
+.oro-line {
+    display: block;
+    width: 40px; height: 1px;
+    background: var(--oro);
+    margin-bottom: 1.25rem;
 }
 
-.nav-menu{
-    list-style:none;
-    display:flex;
-    margin-right: 40px;
+/* ── Eyebrow ── */
+.eyebrow {
+    font-size: .68rem;
+    font-weight: 500;
+    letter-spacing: .35em;
+    text-transform: uppercase;
+    color: var(--oro);
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    margin-bottom: 1rem;
+}
+.eyebrow::before {
+    content: '';
+    display: block;
+    width: 36px; height: 1px;
+    background: var(--oro);
+    flex-shrink: 0;
 }
 
-.nav-menu-item{
-    font-size:20px;
-    margin:0 10px;
+/* ── Estrellas ── */
+.stars { color: var(--oro); letter-spacing: .1em; }
+
+/* ── Animaciones ── */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(26px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+}
+@keyframes slowZoom {
+    from { transform: scale(1.08) translateY(0); }
+    to   { transform: scale(1.0)  translateY(-2%); }
 }
 
-.menu-item{
-    padding:5px ;
-    background-color:#C9A227;
-    border-radius:10px;
+.anim-1 { opacity: 0; animation: fadeUp .8s .2s forwards; }
+.anim-2 { opacity: 0; animation: fadeUp .8s .4s forwards; }
+.anim-3 { opacity: 0; animation: fadeUp .8s .6s forwards; }
+.anim-4 { opacity: 0; animation: fadeUp .8s .8s forwards; }
+.anim-5 { opacity: 0; animation: fadeUp .8s 1.0s forwards; }
+
+/* ── Divider dorado ── */
+.divider-oro {
+    border: none;
+    border-top: 1px solid rgba(201,168,76,.2);
+    margin: 1.5rem 0;
 }
 
-.menu-item:hover {
-    background-color: black;
+/* ── Link sutil ── */
+.link-subtle {
+    font-size: .78rem;
+    color: rgba(255,255,255,.45);
+    text-decoration: none;
+    transition: color .25s;
+    letter-spacing: .05em;
+}
+.link-subtle:hover { color: var(--oro); }
+.link-oro {
+    font-size: .82rem;
+    color: var(--oro);
+    text-decoration: none;
+    transition: color .25s, opacity .25s;
+    letter-spacing: .04em;
+}
+.link-oro:hover { color: var(--oro-claro); }
+
+/* ── Barra lateral dorada ── */
+.side-accent {
+    position: fixed;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, transparent 0%, var(--oro) 40%, var(--oro) 60%, transparent 100%);
+    z-index: 100;
 }
 
+/* ── Nav global ── */
+.site-nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    padding: 1.5rem 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(to bottom, rgba(0,0,0,.6), transparent);
+}
+.nav-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: #fff;
+    text-decoration: none;
+    letter-spacing: .05em;
+}
+.nav-brand em { font-style: italic; color: var(--oro-claro); }
+.nav-links { display: flex; gap: 2rem; align-items: center; }
+.nav-links a {
+    font-size: .68rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.55);
+    text-decoration: none;
+    transition: color .25s;
+}
+.nav-links a:hover { color: var(--oro); }
+.nav-links .nav-cta {
+    color: var(--oro);
+    border: 1px solid rgba(201,168,76,.4);
+    padding: .4rem 1.1rem;
+}
+.nav-links .nav-cta:hover { background: rgba(201,168,76,.1); color: var(--oro-claro); }
 
-
-
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .site-nav { padding: 1.2rem 1.5rem; }
+}

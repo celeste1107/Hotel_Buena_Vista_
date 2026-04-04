@@ -8,28 +8,39 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table (name="reserva")
-public class Reservas{
+@Table(name = "reserva")
+public class Reservas {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;  // id BIGINT AUTO_INCREMENT PRIMARY KEY
+    private Long id;
 
     @Column(name = "fecha_entrada", nullable = false)
-    private LocalDate fechaEntrada;  // fecha_entrada DATE NOT NULL
+    private LocalDate fechaEntrada;
 
     @Column(name = "fecha_salida", nullable = false)
-    private LocalDate fechaSalida;   // fecha_salida DATE NOT NULL
-
+    private LocalDate fechaSalida;
+    // Relación con Huesped
     @ManyToOne
     @JoinColumn(name = "huesped_id", nullable = false)
-    private Huesped huesped;  
+    private Huesped huesped;
 
-    public Reservas(Long id, LocalDate fechaEntrada, LocalDate fechaSalida, Huesped huesped) {
+    // 🔥 Relación con Habitacion (LO QUE TE FALTABA)
+    @ManyToOne
+    @JoinColumn(name = "habitacion_id", nullable = false)
+    private Habitacion habitacion;
+
+    // Constructor vacío (OBLIGATORIO en JPA)
+    public Reservas() {
+    }
+
+    // Constructor completo
+    public Reservas(Long id, LocalDate fechaEntrada, LocalDate fechaSalida, Huesped huesped, Habitacion habitacion) {
         this.id = id;
         this.fechaEntrada = fechaEntrada;
         this.fechaSalida = fechaSalida;
         this.huesped = huesped;
+        this.habitacion = habitacion;
     }
 
     public Long getId() {
@@ -64,5 +75,11 @@ public class Reservas{
         this.huesped = huesped;
     }
 
-    
+    public Habitacion getHabitacion() {
+        return habitacion;
+    }
+
+    public void setHabitacion(Habitacion habitacion) {
+        this.habitacion = habitacion;
+    }
 }

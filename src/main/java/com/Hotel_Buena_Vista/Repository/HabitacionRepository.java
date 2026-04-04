@@ -4,11 +4,15 @@
  */
 package com.Hotel_Buena_Vista.Repository;
 
-import com.Hotel_Buena_Vista.domain.Reservas;
-import java.util.List;
+import com.Hotel_Buena_Vista.domain.Habitacion;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ReservaRepository extends JpaRepository<Reservas, Long> {
-    @Override
-    List<Reservas> findAll();
+
+
+public interface HabitacionRepository extends JpaRepository<Habitacion, Long> {
 }
+
+ 
+
+    
+

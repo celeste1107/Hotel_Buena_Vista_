@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Hotel Buena Vista</title>
+    <link rel="stylesheet" href="/css/estilos.css"/>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f0f4f8;
+        }
+
+        /* Header */
+        header {
+            background: url('https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg') center/cover no-repeat;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin: 0;
+        }
+
+        /* Hero section */
+        .hero {
+            padding: 40px;
+            text-align: center;
+            background: #fff;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            margin: -80px auto 40px auto;
+            width: 90%;
+            border-radius: 12px;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        /* Tabla de reservas */
+        table {
+            width: 90%;
+            margin: 40px auto 60px auto;
+            border-collapse: separate;
+            border-spacing: 0;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: #fff;
+        }
+
+        th {
+            background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 15px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 12px 15px;
+            text-align: center;
+            color: #555;
+            transition: background 0.3s;
+        }
+
+        tr:nth-child(even) td {
+            background: #f9f9f9;
+        }
+
+        tr:hover td {
+            background: #e8f0fe;
+        }
+
+        .btn-cancel {
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-cancel:hover {
+            background-color: #ff3b3b;
+        }
+
+        /* Sección de habitaciones */
+        .rooms {
+            width: 90%;
+            margin: 0 auto 60px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .room-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .room-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .room-card h3 {
+            margin: 15px;
+            color: #333;
+        }
+
+        .room-card p {
+            margin: 0 15px 15px 15px;
+            color: #555;
+        }
+
+        .room-card:hover {
+            transform: scale(1.03);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #333;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Hotel Buena Vista</h1>
+</header>
+
+<div class="hero">
+    <p>Bienvenido a Hotel Buena Vista. Disfruta de nuestras habitaciones cómodas y servicios premium para que tu estancia sea inolvidable.</p>
+</div>
+
+<h2 style="text-align:center; color:#333;">Lista de Reservas</h2>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Entrada</th>
+        <th>Salida</th>
+        <th>Huésped</th>
+        <th>Habitación</th>
+        <th>Acción</th>
+    </tr>
+
+    <tr th:each="r : ${reservas}">
+        <td th:text="${r.id}"></td>
+        <td th:text="${r.fechaEntrada}"></td>
+        <td th:text="${r.fechaSalida}"></td>
+        <td th:text="${r.huesped.nombre}"></td>
+        <td th:text="${r.habitacion.id}"></td>
+        <td>
+            <a th:href="@{'/reservas/cancelar/' + ${r.id}}">
+                <button class="btn-cancel">Cancelar</button>
+            </a>
+        </td>
+    </tr>
+</table>
+
+<h2 style="text-align:center; color:#333;">Nuestras Habitaciones</h2>
+
+<div class="rooms">
+    <div class="room-card">
+        <img src="https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg" alt="Habitación Deluxe"/>
+        <h3>Habitación Deluxe</h3>
+        <p>Cama king, vista al mar y minibar incluido.</p>
+    </div>
+    <div class="room-card">
+        <img src="https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg" alt="Suite Premium"/>
+        <h3>Suite Premium</h3>
+        <p>Espaciosa, con sala privada y balcón panorámico.</p>
+    </div>
+    <div class="room-card">
+        <img src="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg" alt="Habitación Estándar"/>
+        <h3>Habitación Estándar</h3>
+        <p>Perfecta para estancias cortas con todas las comodidades.</p>
+    </div>
+</div>
+
+<footer>
+    &copy; 2026 Hotel Buena Vista. Todos los derechos reservados.
+</footer>
+
+</body>
+</html>

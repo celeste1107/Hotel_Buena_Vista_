@@ -12,7 +12,7 @@
 
 
     <style>
-        /* ──────────────────────────────────────
+/* ──────────────────────────────────────
            HERO
         ────────────────────────────────────── */
         .hero {
@@ -415,7 +415,7 @@
     </div>
 
     <!-- Panel reserva rápida -->
-    <div class="booking-panel anim-5">
+    <form action="/reservas/asignar-habitacion" method="post" class="booking-panel anim-5">
         <div class="bp-field">
             <label for="checkin">Check-in</label>
             <input type="date" id="checkin" name="checkin"/>
@@ -449,7 +449,7 @@
         <button class="bp-btn">
             <i class="bi bi-search me-2"></i>Consultar
         </button>
-    </div>
+    </form>
 
     <!-- Scroll indicator -->
     <div class="scroll-hint anim-5">

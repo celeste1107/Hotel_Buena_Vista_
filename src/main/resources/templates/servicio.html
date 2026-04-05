@@ -1,15 +1,101 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
 <html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<head>
+    <title>Servicios del Hotel</title>
+    <style>
+        body {
+            background: #fdfaf6;
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 30px;
+            color: #c59d5f;
+        }
+
+        table {
+            width: 80%;
+            margin: 30px auto;
+            border-collapse: collapse;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px 15px;
+        }
+
+        th {
+            background: #c59d5f;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background: #f7f2e7;
+        }
+
+        tr:hover {
+            background: #f0e6d2;
+        }
+
+        .disponible { color: #2ecc71; font-weight: bold; }
+        .no-disponible { color: #e74c3c; font-weight: bold; }
+
+        form { margin: 20px 0; }
+        input, select, button {
+            padding: 8px 12px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-right: 5px;
+        }
+
+        button {
+            background: #c59d5f;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Servicios del Hotel</h1>
+
+<form method="get" action="/servicios">
+    <input type="text" name="tipo" placeholder="Tipo (spa, desayuno...)">
+    <select name="disponible">
+        <option value="">Todos</option>
+        <option value="true">Disponibles</option>
+        <option value="false">No disponibles</option>
+    </select>
+    <button type="submit">Filtrar</button>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Tipo</th>
+            <th>Precio</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="s : ${servicios}">
+            <td th:text="${s.nombre}"></td>
+            <td th:text="${s.descripcion}"></td>
+            <td th:text="${s.tipo}"></td>
+            <td>₡<span th:text="${s.precio}"></span></td>
+            <td>
+                <span th:if="${s.disponible}" class="disponible">Disponible</span>
+                <span th:if="${!s.disponible}" class="no-disponible">No disponible</span>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
 </html>

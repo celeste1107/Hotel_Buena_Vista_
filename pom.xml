@@ -11,8 +11,10 @@
 	<groupId>com.Hotel_BuenaVvista</groupId>
 	<artifactId>Hotel_Buena_Vista</artifactId>
 	<version>1</version>
+        
 	<name>Hotel_Buena_Vista</name>
 	<description>Sistema de Hotel</description>
+        
 	<url/>
         <licenses>
             <license/>
@@ -118,6 +120,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
+                    <mainClass>com.Hotel_Buena_Vista.HotelBuenaVistaApplication</mainClass>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
@@ -128,5 +131,6 @@
             </plugin>
         </plugins>
     </build>
+ 
 
 </project>

@@ -660,5 +660,29 @@
         }
     });
 </script>
+<!-- Tu formulario de login arriba -->
+<form id="loginForm" action="#" method="POST" class="anim-3">
+    <input type="email" id="email" placeholder="Correo" required>
+    <input type="password" id="password" placeholder="Contraseña" required>
+    <button type="submit">Entrar</button>
+</form>
+
+<!-- Aquí pegas esto justo antes de </body> -->
+<script>
+    const form = document.getElementById('loginForm');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault(); // evita recarga
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        if(email && password){
+            // redirige a tu página principal
+            window.location.href = "/principal.html"; // o "/principal" si tu servidor lo maneja así
+        } else {
+            alert("Ingresa correo y contraseña");
+        }
+    });
+</script>
 </body>
 </html>

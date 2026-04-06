@@ -174,6 +174,7 @@ INSERT INTO reservas (id_huesped, id_habitacion, fecha_entrada, fecha_salida, nu
   (3, 1, '2026-04-08', '2026-04-11', 1, 225.00, 'completada');
  
 -- Inicio de sesión
+
 INSERT INTO inicio_sesion (id_usuario, ip_address, token, estado) VALUES
   (1, '192.168.1.10', 'tok_admin_abc123',  'activa'),
   (2, '192.168.1.11', 'tok_carlos_xyz789', 'cerrada');
@@ -181,3 +182,6 @@ INSERT INTO inicio_sesion (id_usuario, ip_address, token, estado) VALUES
 -- Registro (check-in completado para reserva 3)
 INSERT INTO registro (id_reserva, id_huesped, id_usuario, fecha_checkin, fecha_checkout, deposito, notas) VALUES
   (3, 3, 2, '2026-04-08 14:30:00', '2026-04-11 11:00:00', 50.00, 'Huésped llegó puntual, sin incidentes.');
+
+INSERT INTO usuarios(nombre, email, password_hash, rol)
+VALUES ('Admin', 'admin@hotel.com', '$2a$12$7rP8b7fC1r8Dk.1uOa4yveJQbqH.8U1zBfKp4ZJZDf/hGfY5bNQ6y', 'admin');

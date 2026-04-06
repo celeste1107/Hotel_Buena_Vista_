@@ -1,13 +1,21 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.Hotel_Buena_Vista.Service;
 
-/**
- *
- * @author tetec
- */
+import com.Hotel_Buena_Vista.Repository.InicioSeccionRepository;
+import com.Hotel_Buena_Vista.domain.InicioSeccion;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
 public class inicioSeccionService {
-    
+
+    private final InicioSeccionRepository inicioSeccionRepository;
+
+    @Autowired
+    public inicioSeccionService(InicioSeccionRepository inicioSeccionRepository){
+        this.inicioSeccionRepository = inicioSeccionRepository;
+    }
+
+    public InicioSeccion buscarPorEmail(String email){
+        return inicioSeccionRepository.findByEmail(email);
+    }
 }

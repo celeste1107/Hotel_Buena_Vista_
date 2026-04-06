@@ -1,13 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.Hotel_Buena_Vista.Repository;
 
-/**
- *
- * @author tetec
- */
-public class InicioSeccionRepository {
-    
+import com.Hotel_Buena_Vista.domain.InicioSeccion;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface InicioSeccionRepository extends JpaRepository<InicioSeccion, Long> {
+    InicioSeccion findByEmail(String email);
 }

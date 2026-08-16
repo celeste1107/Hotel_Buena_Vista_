@@ -1,20 +1,21 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div class="hstack gap-3">
-            <input class="form-control me-auto" type="text" placeholder="Add your item here..." aria-label="Add your item here...">
-            <button type="button" class="btn btn-secondary">Submit</button>
-            <div class="vr"></div>
-            <button type="button" class="btn btn-outline-danger">Reset</button>
-    </div>
-        </body>
-    </html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>Registrar huésped</title></head>
+<body>
+<h1>Registrar huésped</h1>
+<p th:if="${error}" th:text="${error}" style="color:red"></p>
+<form th:action="@{/huespedes/guardar}" method="post" th:object="${huesped}">
+    <label>Nombre <input type="text" th:field="*{nombre}" required></label><br>
+    <label>Apellido <input type="text" th:field="*{apellido}" required></label><br>
+    <label>Email <input type="email" th:field="*{email}"></label><br>
+    <label>Teléfono <input type="text" th:field="*{telefono}"></label><br>
+    <label>Tipo documento
+        <select th:field="*{tipoDocumento}"><option value="cedula">Cédula</option><option value="pasaporte">Pasaporte</option><option value="licencia">Licencia</option></select>
+    </label><br>
+    <label>Documento <input type="text" th:field="*{documentoIdentidad}" required></label><br>
+    <label>Nacionalidad <input type="text" th:field="*{nacionalidad}"></label><br>
+    <button type="submit">Guardar huésped</button>
+    <a th:href="@{/huespedes}">Cancelar</a>
+</form>
+</body>
+</html>

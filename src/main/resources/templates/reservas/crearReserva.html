@@ -1,15 +1,20 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>Crear reserva</title></head>
+<body>
+<h1>Crear reserva</h1>
+<p th:if="${error}" th:text="${error}" style="color:red"></p>
+<form th:action="@{/reservas/crear}" method="post">
+<label>Huésped
+<select name="huespedId" required><option value="">Seleccione</option><option th:each="h : ${huespedes}" th:value="${h.id}" th:text="${h.nombre + ' ' + h.apellido}"></option></select>
+</label><br>
+<label>Entrada <input type="date" name="fechaEntrada" th:value="${fechaEntrada}" required></label><br>
+<label>Salida <input type="date" name="fechaSalida" th:value="${fechaSalida}" required></label><br>
+<label>Habitación
+<select name="habitacionId" required><option value="">Seleccione</option><option th:each="h : ${habitaciones}" th:value="${h.id}" th:text="${h.numero + ' - ' + h.tipo + ' - ₡' + h.precio}"></option></select>
+</label><br>
+<label>Servicios adicionales</label><br><div th:each="s : ${servicios}"><label><input type="checkbox" name="servicioIds" th:value="${s.id}"><span th:text="${s.nombre + ' - ₡' + s.precio}"></span></label></div><br>
+<button type="submit">Confirmar reserva</button>
+<a th:href="@{/reservas}">Cancelar</a>
+</form>
+</body></html>

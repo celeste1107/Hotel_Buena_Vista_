@@ -18,7 +18,7 @@ CREATE TABLE usuarios (
   nombre         VARCHAR(100)   NOT NULL,
   email          VARCHAR(150)   NOT NULL UNIQUE,
   password_hash  VARCHAR(255)   NOT NULL,
-  rol            ENUM('admin', 'recepcionista', 'supervisor') NOT NULL DEFAULT 'recepcionista',
+  rol            ENUM('admin', 'recepcionista', 'supervisor', 'usuario') NOT NULL DEFAULT 'usuario',
   created_at     TIMESTAMP      NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at     TIMESTAMP      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id_usuario),
@@ -175,9 +175,9 @@ INSERT INTO reservas (id_huesped, id_habitacion, fecha_entrada, fecha_salida, nu
  
 -- Inicio de sesión
 
-INSERT INTO inicio_sesion (id_usuario, ip_address, token, estado) VALUES
-  (1, '192.168.1.10', 'tok_admin_abc123',  'activa'),
-  (2, '192.168.1.11', 'tok_carlos_xyz789', 'cerrada');
+INSERT INTO inicio_sesion (id_usuario, token, estado) VALUES
+  (1, 'tok_admin_abc123',  'activa'),
+  (2, 'tok_carlos_xyz789', 'cerrada');
  
 -- Registro (check-in completado para reserva 3)
 INSERT INTO registro (id_reserva, id_huesped, id_usuario, fecha_checkin, fecha_checkout, deposito, notas) VALUES

@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>Reservas</title></head>
+<body>
+<h1>Reservas</h1>
+<p th:if="${mensaje}" th:text="${mensaje}" style="color:green"></p>
+<p th:if="${error}" th:text="${error}" style="color:red"></p>
+<a th:href="@{/reservas/crear}">Crear reserva</a>
+<table border="1">
+<tr><th>ID</th><th>Huésped</th><th>Habitación</th><th>Entrada</th><th>Salida</th><th>Total</th><th>Estado</th><th>Acciones</th></tr>
+<tr th:each="r : ${reservas}">
+<td th:text="${r.id}"></td><td th:text="${r.huesped.nombre + ' ' + r.huesped.apellido}"></td><td th:text="${r.habitacion.numero}"></td><td th:text="${r.fechaEntrada}"></td><td th:text="${r.fechaSalida}"></td><td th:text="${r.precioTotal}"></td><td th:text="${r.estado}"></td>
+<td><a th:href="@{/reservas/editar/{id}(id=${r.id})}">Modificar</a> | <a th:href="@{/reservas/cancelar/{id}(id=${r.id})}">Cancelar</a> | <a th:href="@{/pagos/{id}(id=${r.id})}">Pagar</a> | <a th:href="@{/facturas/{id}(id=${r.id})}">Factura</a></td>
+</tr>
+</table>
+</body></html>

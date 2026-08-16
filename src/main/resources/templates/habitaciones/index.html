@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Buena Vista — Habitaciones</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <style>
+        :root { --gold:#c9a84c; --ink:#0b0b0b; --paper:#f7f3e8; --muted:rgba(247,243,232,.62); }
+        * { box-sizing:border-box; }
+        body { min-height:100vh; background:radial-gradient(circle at 80% 0,#2b2518 0,transparent 33%),var(--ink); color:var(--paper); font-family:Georgia,"Times New Roman",serif; }
+        .topbar { padding:1.25rem 0; border-bottom:1px solid rgba(201,168,76,.28); background:rgba(11,11,11,.92); }
+        .brand { color:var(--gold); font-size:1.35rem; letter-spacing:.07em; text-decoration:none; } .brand em { color:var(--paper); }
+        .nav-back { color:var(--gold); text-decoration:none; font-family:Arial,sans-serif; font-size:.85rem; }
+        .hero { padding:4.5rem 0 2.2rem; } .eyebrow { color:var(--gold); font:700 .72rem Arial,sans-serif; letter-spacing:.18em; text-transform:uppercase; }
+        h1 { font-size:clamp(2.5rem,6vw,4.7rem); margin:.5rem 0 1rem; } h1 em { color:var(--gold); font-weight:normal; }
+        .intro { max-width:680px; color:var(--muted); line-height:1.7; }
+        .panel { background:rgba(28,28,27,.92); border:1px solid rgba(201,168,76,.26); padding:1.35rem; box-shadow:0 18px 50px rgba(0,0,0,.25); }
+        .form-label { color:var(--gold); font:700 .68rem Arial,sans-serif; letter-spacing:.1em; text-transform:uppercase; }
+        .form-control,.form-select { background:#101010; color:var(--paper); border:1px solid rgba(255,255,255,.2); border-radius:0; min-height:45px; }
+        .form-control::placeholder { color:rgba(247,243,232,.4); }.form-control:focus,.form-select:focus { background:#101010;color:var(--paper);border-color:var(--gold);box-shadow:0 0 0 .2rem rgba(201,168,76,.12); }
+        .btn-gold,.btn-outline-gold { padding:.72rem 1rem; border-radius:0; font:700 .72rem Arial,sans-serif; letter-spacing:.08em; text-transform:uppercase; }
+        .btn-gold { border:1px solid var(--gold); background:var(--gold); color:#111; }.btn-gold:hover { background:#e0c16a;border-color:#e0c16a;color:#111; }
+        .btn-outline-gold { border:1px solid rgba(201,168,76,.7); color:var(--gold); background:transparent; text-decoration:none; }.btn-outline-gold:hover { background:var(--gold);color:#111; }
+        .room-card { background:#171717; border:1px solid rgba(201,168,76,.22); height:100%; padding:1.4rem; position:relative; overflow:hidden; }.room-card:before { content:""; display:block; width:40px; border-top:2px solid var(--gold); margin-bottom:1rem; }
+        .room-number { color:var(--gold); font:700 .7rem Arial,sans-serif; letter-spacing:.13em; }.room-type { font-size:1.65rem; margin:.35rem 0; }.detail { color:var(--muted); font-family:Arial,sans-serif; font-size:.9rem; }
+        .price { color:var(--gold); font-size:1.55rem; }.price small { color:var(--muted); font-size:.75rem; }
+        .status { display:inline-block; margin-top:.8rem; padding:.28rem .55rem; border:1px solid rgba(201,168,76,.45); color:var(--gold); font:700 .65rem Arial,sans-serif; letter-spacing:.08em; text-transform:uppercase; }
+        .status.ocupada,.status.mantenimiento { color:#f29b8b; border-color:rgba(242,155,139,.55); }.status.limpia { color:#a9dbc0; border-color:rgba(169,219,192,.55); }
+        .empty { border:1px dashed rgba(201,168,76,.35); color:var(--muted); padding:2.25rem; text-align:center; }.alert-error { border:1px solid #a44c42; color:#ffb1a6; background:rgba(164,76,66,.12); padding:.85rem 1rem; }
+    </style>
+</head>
+<body>
+    <header class="topbar"><div class="container d-flex justify-content-between align-items-center"><a class="brand" th:href="@{/principal}">Hotel <em>Buena Vista</em></a><a class="nav-back" th:href="@{/principal}"><i class="bi bi-arrow-left"></i> Volver al inicio</a></div></header>
+    <main class="container pb-5">
+        <section class="hero"><p class="eyebrow">Estadía excepcional</p><h1>Nuestras <em>Habitaciones</em></h1><p class="intro">Consulta las habitaciones, filtra por número o tipo y actualiza su estado operativo cuando sea necesario.</p></section>
+        <section class="panel mb-4">
+            <div class="d-flex flex-column flex-lg-row justify-content-between gap-3 mb-3"><div><p class="eyebrow mb-1">Búsqueda</p><h2 class="h4 mb-0">Encuentra la habitación ideal</h2></div><a class="btn-outline-gold align-self-lg-center" th:href="@{/habitaciones/nueva}"><i class="bi bi-plus-lg me-1"></i> Registrar habitación</a></div>
+            <form th:action="@{/habitaciones}" method="get" class="row g-3 align-items-end">
+                <div class="col-md-5"><label class="form-label" for="numero">Número</label><input class="form-control" id="numero" name="numero" th:value="${param.numero}" placeholder="Ej. 101"></div>
+                <div class="col-md-5"><label class="form-label" for="tipo">Tipo</label><input class="form-control" id="tipo" name="tipo" th:value="${param.tipo}" placeholder="Ej. Suite Deluxe"></div>
+                <div class="col-md-2 d-grid"><button class="btn-gold" type="submit"><i class="bi bi-search me-1"></i> Buscar</button></div>
+            </form>
+        </section>
+        <p th:if="${error}" class="alert-error" th:text="${error}"></p>
+        <section class="row g-4" th:if="${not #lists.isEmpty(habitaciones)}">
+            <article class="col-md-6 col-xl-4" th:each="h : ${habitaciones}">
+                <div class="room-card">
+                    <div class="room-number" th:text="|Habitación ${h.numero}|">Habitación 101</div><h2 class="room-type" th:text="${h.tipo}">Suite Deluxe</h2>
+                    <div class="row g-2 detail my-3"><div class="col-6"><i class="bi bi-people me-1"></i><span th:text="|${h.capacidad} huéspedes|">2 huéspedes</span></div><div class="col-6"><i class="bi bi-moon-stars me-1"></i><span class="price" th:text="|₡${h.precio}|">₡0</span><small>/ noche</small></div></div>
+                    <span class="status" th:classappend="| ${h.estado}|" th:text="${h.estado}">Disponible</span>
+                    <form class="mt-4 pt-3 border-top border-secondary-subtle" th:action="@{/habitaciones/{id}/estado(id=${h.id})}" method="post">
+                        <label class="form-label" th:for="|estado-${h.id}|">Estado</label><div class="input-group"><select class="form-select" th:id="|estado-${h.id}|" name="estado"><option value="disponible" th:selected="${h.estado == 'disponible'}">Disponible</option><option value="ocupada" th:selected="${h.estado == 'ocupada'}">Ocupada</option><option value="limpia" th:selected="${h.estado == 'limpia'}">Limpia</option><option value="mantenimiento" th:selected="${h.estado == 'mantenimiento'}">Mantenimiento</option><option value="reservada" th:selected="${h.estado == 'reservada'}">Reservada</option></select><button class="btn-gold" type="submit">Guardar</button></div>
+                    </form>
+                </div>
+            </article>
+        </section>
+        <section class="empty" th:if="${#lists.isEmpty(habitaciones)}"><i class="bi bi-door-closed fs-3 d-block mb-2"></i>No se encontraron habitaciones con esos criterios.</section>
+    </main>
+</body>
+</html>

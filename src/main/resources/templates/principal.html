@@ -373,12 +373,12 @@
 <nav class="site-nav anim-1">
     <a href="/principal" class="nav-brand">Hotel <em>Buena Vista</em></a>
     <div class="nav-links">
-        <a href="#">Habitaciones</a>
-        <a href="/servicios?disponible=true">Experiencias</a>
-        <a href="/servicios">Servicios</a>
-        <a href="#">Galería</a>
-        <a href="#">Contacto</a>
-        <a href="/inicioSeccion" class="nav-cta">Iniciar Sesión</a>
+        <a th:href="@{/habitaciones}">Habitaciones</a>
+        <a th:href="@{/servicios(disponible=true)}">Experiencias</a>
+        <a th:href="@{/servicios}">Servicios</a>
+        <a th:href="@{/galeria}">Galería</a>
+        <a th:href="@{/contacto}">Contacto</a>
+        <a th:href="@{/inicioSeccion}" class="nav-cta">Iniciar Sesión</a>
     </div>
 </nav>
 
@@ -407,8 +407,8 @@
                 </p>
 
                 <div class="d-flex flex-wrap gap-3 anim-4">
-                    <a href="#habitaciones" class="btn-oro">Reservar Ahora</a>
-                    <a href="#habitaciones" class="btn-ghost">
+                    <a th:href="@{/reservas/crear}" class="btn-oro">Reservar Ahora</a>
+                    <a th:href="@{/habitaciones}" class="btn-ghost">
                         <i class="bi bi-grid me-2"></i>Ver Habitaciones
                     </a>
                 </div>
@@ -498,7 +498,7 @@
                         </div>
                         <div class="d-flex align-items-center justify-content-between">
                             <div class="room-price">$189<span>/noche</span></div>
-                            <a href="#" class="btn-dark-sm">Reservar</a>
+                            <a th:href="@{/reservas/crear}" class="btn-dark-sm">Reservar</a>
                         </div>
                     </div>
                 </div>
@@ -519,7 +519,7 @@
                         </div>
                         <div class="d-flex align-items-center justify-content-between">
                             <div class="room-price">$340<span>/noche</span></div>
-                            <a href="#" class="btn-dark-sm">Reservar</a>
+                            <a th:href="@{/reservas/crear}" class="btn-dark-sm">Reservar</a>
                         </div>
                     </div>
                 </div>
@@ -540,7 +540,7 @@
                         </div>
                         <div class="d-flex align-items-center justify-content-between">
                             <div class="room-price">$780<span>/noche</span></div>
-                            <a href="#" class="btn-dark-sm">Reservar</a>
+                            <a th:href="@{/reservas/crear}" class="btn-dark-sm">Reservar</a>
                         </div>
                     </div>
                 </div>
@@ -657,30 +657,6 @@
         if (co.value <= e.target.value) {
             const d = new Date(e.target.value); d.setDate(d.getDate()+1);
             co.value = d.toISOString().split('T')[0];
-        }
-    });
-</script>
-<!-- Tu formulario de login arriba -->
-<form id="loginForm" action="#" method="POST" class="anim-3">
-    <input type="email" id="email" placeholder="Correo" required>
-    <input type="password" id="password" placeholder="Contraseña" required>
-    <button type="submit">Entrar</button>
-</form>
-
-<!-- Aquí pegas esto justo antes de </body> -->
-<script>
-    const form = document.getElementById('loginForm');
-
-    form.addEventListener('submit', function(e) {
-        e.preventDefault(); // evita recarga
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-
-        if(email && password){
-            // redirige a tu página principal
-            window.location.href = "/principal.html"; // o "/principal" si tu servidor lo maneja así
-        } else {
-            alert("Ingresa correo y contraseña");
         }
     });
 </script>

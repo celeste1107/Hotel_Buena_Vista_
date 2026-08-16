@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>Registrar habitación</title></head>
+<body>
+<h1>Registrar habitación</h1>
+<p th:if="${error}" th:text="${error}" style="color:red"></p>
+<form th:action="@{/habitaciones/guardar}" method="post" th:object="${habitacion}">
+<label>Número <input type="text" th:field="*{numero}" required></label><br>
+<label>Tipo <input type="text" th:field="*{tipo}" required></label><br>
+<label>Capacidad <input type="number" th:field="*{capacidad}" min="1" required></label><br>
+<label>Precio por noche <input type="number" step="0.01" th:field="*{precio}" min="0.01" required></label><br>
+<input type="hidden" th:field="*{estado}">
+<button type="submit">Guardar</button>
+<a th:href="@{/habitaciones}">Cancelar</a>
+</form>
+</body></html>

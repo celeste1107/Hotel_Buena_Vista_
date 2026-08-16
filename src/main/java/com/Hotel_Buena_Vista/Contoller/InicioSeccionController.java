@@ -1,5 +1,6 @@
 package com.Hotel_Buena_Vista.Contoller;
 
+import com.Hotel_Buena_Vista.Repository.InicioSeccionRepository;
 import com.Hotel_Buena_Vista.Service.inicioSeccionService;
 import com.Hotel_Buena_Vista.domain.InicioSeccion;
 import jakarta.servlet.http.HttpSession;
@@ -7,53 +8,87 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class InicioSeccionController {
 
-    private final inicioSeccionService inicioSeccionService;
+    private final inicioSeccionService service;
+    private final InicioSeccionRepository repository;
 
     @Autowired
-    public InicioSeccionController(inicioSeccionService inicioSeccionService){
-        this.inicioSeccionService = inicioSeccionService;
+    public InicioSeccionController(inicioSeccionService service, InicioSeccionRepository repository) {
+        this.service = service;
+        this.repository = repository;
     }
 
-    // Mostrar login
     @GetMapping("/inicioSeccion")
-    public String mostrarInicio() {
-        return "inicioSeccion"; 
-    }
+    public String mostrarInicio() { return "inicioSeccion"; }
 
-    // Procesar login
     @PostMapping("/login")
     public String login(@RequestParam String email,
                         @RequestParam String password,
                         HttpSession session,
-                        Model model){
-
-        InicioSeccion usuario = inicioSeccionService.buscarPorEmail(email);
-
-        if(usuario != null){
-            if (BCrypt.checkpw(password, usuario.getPassword_hash())) { // ojo, tu getter se llama getPassword_hash()
-                session.setAttribute("usuario", usuario);
-                return "redirect:/principal";
-            }
+                        Model model) {
+        if (email == null || email.isBlank() || password == null || password.isBlank()) {
+            model.addAttribute("error", "Datos incorrectos");
+            return "inicioSeccion";
         }
 
-        model.addAttribute("error", "Email o contraseña incorrectos");
-        return "inicioSeccion";
+        InicioSeccion usuario = service.buscarPorEmail(email.trim());
+        if (usuario == null) {
+            model.addAttribute("error", "Usuario no registrado");
+            return "inicioSeccion";
+        }
+
+        if (!BCrypt.checkpw(password, usuario.getPassword_hash())) {
+            model.addAttribute("error", "Datos incorrectos");
+            return "inicioSeccion";
+        }
+
+        session.setAttribute("usuario", usuario);
+        return "redirect:/principal";
     }
 
-    // Mostrar página principal
-    @GetMapping("/principal")
-    public String principal(HttpSession session, Model model){
-        InicioSeccion usuario = (InicioSeccion) session.getAttribute("usuario");
-        if(usuario == null) return "redirect:/inicioSeccion";
+    @GetMapping("/registro")
+    public String mostrarRegistro() {
+        return "registro";
+    }
 
+    @PostMapping("/registro")
+    public String registrar(@RequestParam String nombre,
+                            @RequestParam String apellido,
+                            @RequestParam String email,
+                            @RequestParam String password,
+                            @RequestParam String password2,
+                            Model model) {
+        if (nombre == null || nombre.isBlank() || apellido == null || apellido.isBlank()
+                || email == null || email.isBlank() || password == null || password.length() < 8
+                || !password.equals(password2)) {
+            model.addAttribute("error", "Datos incorrectos");
+            return "registro";
+        }
+
+        if (repository.findByEmail(email.trim()) != null) {
+            model.addAttribute("error", "El correo electrónico ya está registrado");
+            return "registro";
+        }
+
+        InicioSeccion usuario = new InicioSeccion();
+        usuario.setNombre(nombre.trim() + " " + apellido.trim());
+        usuario.setEmail(email.trim());
+        usuario.setPassword_hash(BCrypt.hashpw(password, BCrypt.gensalt()));
+        usuario.setRol("usuario");
+        repository.save(usuario);
+
+        return "redirect:/inicioSeccion?registrado=true";
+    }
+
+    @GetMapping("/principal")
+    public String principal(HttpSession session, Model model) {
+        InicioSeccion usuario = (InicioSeccion) session.getAttribute("usuario");
+        if (usuario == null) return "redirect:/inicioSeccion";
         model.addAttribute("nombre", usuario.getNombre());
-        return "principal"; // principal.html
+        return "principal";
     }
 }

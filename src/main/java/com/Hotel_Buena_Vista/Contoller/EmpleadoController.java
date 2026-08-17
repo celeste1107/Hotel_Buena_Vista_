@@ -8,4 +8,3 @@ import com.Hotel_Buena_Vista.Repository.EmpleadoRepository; import com.Hotel_Bue
  @GetMapping("/editar/{id}") public String editar(@PathVariable Long id,Model m){m.addAttribute("empleado",repo.findById(id).orElseThrow());return "empleados/formulario";}
  @GetMapping("/eliminar/{id}") public String eliminar(@PathVariable Long id){repo.deleteById(id);return "redirect:/empleados";}
 }
-

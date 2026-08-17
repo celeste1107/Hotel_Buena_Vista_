@@ -15,4 +15,3 @@ public interface ReservaRepository extends JpaRepository<Reservas, Long> {
                                    @Param("entrada") LocalDate entrada,
                                    @Param("salida") LocalDate salida);
 }
-

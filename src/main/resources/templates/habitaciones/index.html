@@ -34,7 +34,7 @@
 <body>
     <header class="topbar"><div class="container d-flex justify-content-between align-items-center"><a class="brand" th:href="@{/principal}">Hotel <em>Buena Vista</em></a><a class="nav-back" th:href="@{/principal}"><i class="bi bi-arrow-left"></i> Volver al inicio</a></div></header>
     <main class="container pb-5">
-        <section class="hero"><p class="eyebrow">Estadía excepcional</p><h1>Nuestras <em>Habitaciones</em></h1><p class="intro">Consulta las habitaciones, filtra por número o tipo y actualiza su estado operativo cuando sea necesario.</p></section>
+        <section class="hero"><p class="eyebrow">Estadía excepcional</p><h1>Nuestras <em>Habitaciones</em></h1><p class="intro">Consulta las habitaciones, filtra por número o tipo y actualiza .</p></section>
         <section class="panel mb-4">
             <div class="d-flex flex-column flex-lg-row justify-content-between gap-3 mb-3"><div><p class="eyebrow mb-1">Búsqueda</p><h2 class="h4 mb-0">Encuentra la habitación ideal</h2></div><a class="btn-outline-gold align-self-lg-center" th:href="@{/habitaciones/nueva}"><i class="bi bi-plus-lg me-1"></i> Registrar habitación</a></div>
             <form th:action="@{/habitaciones}" method="get" class="row g-3 align-items-end">
@@ -48,10 +48,10 @@
             <article class="col-md-6 col-xl-4" th:each="h : ${habitaciones}">
                 <div class="room-card">
                     <div class="room-number" th:text="|Habitación ${h.numero}|">Habitación 101</div><h2 class="room-type" th:text="${h.tipo}">Suite Deluxe</h2>
-                    <div class="row g-2 detail my-3"><div class="col-6"><i class="bi bi-people me-1"></i><span th:text="|${h.capacidad} huéspedes|">2 huéspedes</span></div><div class="col-6"><i class="bi bi-moon-stars me-1"></i><span class="price" th:text="|₡${h.precio}|">₡0</span><small>/ noche</small></div></div>
+                    <div class="row g-2 detail my-3"><div class="col-6"><i class="bi bi-building me-1"></i><span th:text="|Piso ${h.piso}|">Piso 1</span></div><div class="col-6"><i class="bi bi-people me-1"></i><span th:text="|${h.capacidad} huéspedes|">2 huéspedes</span></div><div class="col-12"><i class="bi bi-moon-stars me-1"></i><span class="price" th:text="|₡${h.precio}|">₡0</span><small>/ noche</small></div></div>
                     <span class="status" th:classappend="| ${h.estado}|" th:text="${h.estado}">Disponible</span>
                     <form class="mt-4 pt-3 border-top border-secondary-subtle" th:action="@{/habitaciones/{id}/estado(id=${h.id})}" method="post">
-                        <label class="form-label" th:for="|estado-${h.id}|">Estado</label><div class="input-group"><select class="form-select" th:id="|estado-${h.id}|" name="estado"><option value="disponible" th:selected="${h.estado == 'disponible'}">Disponible</option><option value="ocupada" th:selected="${h.estado == 'ocupada'}">Ocupada</option><option value="limpia" th:selected="${h.estado == 'limpia'}">Limpia</option><option value="mantenimiento" th:selected="${h.estado == 'mantenimiento'}">Mantenimiento</option><option value="reservada" th:selected="${h.estado == 'reservada'}">Reservada</option></select><button class="btn-gold" type="submit">Guardar</button></div>
+                        <label class="form-label" th:for="|estado-${h.id}|">Estado</label><div class="input-group"><select class="form-select" th:id="|estado-${h.id}|" name="estado"><option value="disponible" th:selected="${h.estado == 'disponible'}">Disponible</option><option value="ocupada" th:selected="${h.estado == 'ocupada'}">Ocupada</option><option value="mantenimiento" th:selected="${h.estado == 'mantenimiento'}">Mantenimiento</option><option value="reservada" th:selected="${h.estado == 'reservada'}">Reservada</option></select><button class="btn-gold" type="submit">Guardar</button></div>
                     </form>
                 </div>
             </article>

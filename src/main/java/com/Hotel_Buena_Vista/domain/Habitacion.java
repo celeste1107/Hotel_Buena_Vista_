@@ -15,6 +15,9 @@ public class Habitacion {
     @Column(nullable = false, unique = true, length = 10)
     private String numero;
 
+    @Column(nullable = false)
+    private int piso;
+
     @Column(nullable = false, length = 30)
     private String tipo;
 
@@ -45,6 +48,8 @@ public class Habitacion {
     public void setId(Long id) { this.id = id; }
     public String getNumero() { return numero; }
     public void setNumero(String numero) { this.numero = numero; }
+    public int getPiso() { return piso; }
+    public void setPiso(int piso) { this.piso = piso; }
     public String getTipo() { return tipo; }
     public void setTipo(String tipo) { this.tipo = tipo; }
     public int getCapacidad() { return capacidad; }

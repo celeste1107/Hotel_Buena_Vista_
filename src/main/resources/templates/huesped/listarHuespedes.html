@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head><meta charset="UTF-8"><title>Huéspedes</title></head>
-<body>
-<h1>Huéspedes registrados</h1>
-<p th:if="${mensaje}" th:text="${mensaje}" style="color:green"></p>
-<p th:if="${error}" th:text="${error}" style="color:red"></p>
-<a th:href="@{/huespedes/nuevo}">Registrar huésped</a>
-<table border="1">
-<tr><th>Nombre</th><th>Apellido</th><th>Email</th><th>Documento</th><th>Acción</th></tr>
-<tr th:each="h : ${huespedes}">
-<td th:text="${h.nombre}"></td><td th:text="${h.apellido}"></td><td th:text="${h.email}"></td><td th:text="${h.documentoIdentidad}"></td>
-<td><a th:href="@{/huespedes/editar/{id}(id=${h.id})}">Editar</a></td>
-</tr>
-</table>
-</body></html>
+    <head><meta charset="UTF-8"><title>Huéspedes</title></head>
+    <body>
+        <h1>Huéspedes registrados</h1>
+        <p th:if="${mensaje}" th:text="${mensaje}" style="color:green"></p>
+        <p th:if="${error}" th:text="${error}" style="color:red"></p>
+        <a th:href="@{/huespedes/nuevo}">Registrar huésped</a>
+        <table border="1">
+            <tr><th>Nombre</th><th>Apellido</th><th>Email</th><th>Documento</th><th>Acción</th></tr>
+            <tr th:each="h : ${huespedes}">
+                <td th:text="${h.nombre}"></td><td th:text="${h.apellido}"></td><td th:text="${h.email}"></td><td th:text="${h.documentoIdentidad}"></td>
+                <td><a th:href="@{/huespedes/editar/{id}(id=${h.id})}">Editar</a></td>
+            </tr>
+        </table>
+    </body></html>

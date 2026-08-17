@@ -1,20 +1,105 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head><meta charset="UTF-8"><title>Crear reserva</title></head>
-<body>
-<h1>Crear reserva</h1>
-<p th:if="${error}" th:text="${error}" style="color:red"></p>
-<form th:action="@{/reservas/crear}" method="post">
-<label>Huésped
-<select name="huespedId" required><option value="">Seleccione</option><option th:each="h : ${huespedes}" th:value="${h.id}" th:text="${h.nombre + ' ' + h.apellido}"></option></select>
-</label><br>
-<label>Entrada <input type="date" name="fechaEntrada" th:value="${fechaEntrada}" required></label><br>
-<label>Salida <input type="date" name="fechaSalida" th:value="${fechaSalida}" required></label><br>
-<label>Habitación
-<select name="habitacionId" required><option value="">Seleccione</option><option th:each="h : ${habitaciones}" th:value="${h.id}" th:text="${h.numero + ' - ' + h.tipo + ' - ₡' + h.precio}"></option></select>
-</label><br>
-<label>Servicios adicionales</label><br><div th:each="s : ${servicios}"><label><input type="checkbox" name="servicioIds" th:value="${s.id}"><span th:text="${s.nombre + ' - ₡' + s.precio}"></span></label></div><br>
-<button type="submit">Confirmar reserva</button>
-<a th:href="@{/reservas}">Cancelar</a>
-</form>
-</body></html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Hotel Buena Vista — Crear reserva</title><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"><link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"><style>:root{
+            --gold:#c9a84c;
+            --ink:#0b0b0b;
+            --paper:#f7f3e8;
+            --muted:rgba(247,243,232,.6)
+        }
+        body{
+            min-height:100vh;
+            background:radial-gradient(circle at 78% 0,#2c2618,transparent 36%),var(--ink);
+            color:var(--paper);
+            font-family:Georgia,serif
+        }
+        .bar{
+            padding:1.25rem 0;
+            border-bottom:1px solid rgba(201,168,76,.28)
+        }
+        .brand{
+            color:var(--gold);
+            text-decoration:none;
+            font-size:1.35rem;
+            letter-spacing:.07em
+        }
+        .brand em{
+            color:var(--paper)
+        }
+        .back{
+            color:var(--gold);
+            text-decoration:none;
+            font:.85rem Arial,sans-serif
+        }
+        .wrap{
+            max-width:1000px;
+            padding:4.6rem 12px
+        }
+        .eyebrow,.form-label{
+            color:var(--gold);
+            font:700 .7rem Arial,sans-serif;
+            letter-spacing:.16em;
+            text-transform:uppercase
+        }
+        h1{
+            font-size:clamp(2.4rem,6vw,4.3rem)
+        }
+        h1 em{
+            color:var(--gold);
+            font-weight:normal
+        }
+        .card{
+            background:#181818;
+            border:1px solid rgba(201,168,76,.27);
+            padding:2rem
+        }
+        .form-control,.form-select{
+            background:#101010;
+            border:1px solid rgba(255,255,255,.2);
+            color:var(--paper);
+            border-radius:0;
+            min-height:46px
+        }
+        .form-control:focus,.form-select:focus{
+            background:#101010;
+            color:var(--paper);
+            border-color:var(--gold);
+            box-shadow:0 0 0 .2rem rgba(201,168,76,.12)
+        }
+        .option{
+            border:1px solid rgba(255,255,255,.13);
+            padding:.75rem .9rem;
+            margin-bottom:.5rem;
+            font-family:Arial,sans-serif;
+            font-size:.9rem
+        }
+        .form-check-input{
+            background:#101010;
+            border-color:var(--gold)
+        }
+        .form-check-input:checked{
+            background-color:var(--gold);
+            border-color:var(--gold)
+        }
+        .btn-gold,.btn-dark{
+            border-radius:0;
+            padding:.8rem 1rem;
+            font:700 .7rem Arial,sans-serif;
+            letter-spacing:.08em;
+            text-transform:uppercase
+        }
+        .btn-gold{
+            background:var(--gold);
+            border:1px solid var(--gold);
+            color:#111
+        }
+        .btn-dark{
+            background:transparent;
+            border:1px solid rgba(201,168,76,.6);
+            color:var(--gold);
+            text-decoration:none
+        }
+        .alert-error{
+            border:1px solid #a44c42;
+            color:#ffb1a6;
+            background:rgba(164,76,66,.12);
+            padding:.8rem 1rem
+        }</style></head><body><header class="bar"><div class="container d-flex justify-content-between align-items-center"><a class="brand" th:href="@{/principal}">Hotel <em>Buena Vista</em></a><a class="back" th:href="@{/reservas}"><i class="bi bi-arrow-left"></i> Reservas</a></div></header><main class="container wrap"><p class="eyebrow">Planifica tu estadía</p><h1>Crear <em>reserva</em></h1><p class="text-white-50 mb-4">Selecciona al huésped, las fechas, una habitación disponible y servicios opcionales.</p><p th:if="${error}" class="alert-error" th:text="${error}"></p><form class="card row g-4" th:action="@{/reservas/crear}" method="post"><div class="col-md-6"><label class="form-label" for="huespedId">Huésped</label><select class="form-select" id="huespedId" name="huespedId" required><option value="">Seleccione un huésped</option><option th:each="h : ${huespedes}" th:value="${h.id}" th:text="${h.nombre + ' ' + h.apellido}"></option></select></div><div class="col-md-6"><label class="form-label" for="habitacionId">Habitación</label><select class="form-select" id="habitacionId" name="habitacionId" required><option value="">Seleccione una habitación</option><option th:each="h : ${habitaciones}" th:value="${h.id}" th:text="${h.numero + ' — ' + h.tipo + ' — ₡' + h.precio}"></option></select></div><div class="col-md-6"><label class="form-label" for="fechaEntrada">Entrada</label><input class="form-control" id="fechaEntrada" type="date" name="fechaEntrada" th:value="${fechaEntrada}" required></div><div class="col-md-6"><label class="form-label" for="fechaSalida">Salida</label><input class="form-control" id="fechaSalida" type="date" name="fechaSalida" th:value="${fechaSalida}" required></div><div class="col-12"><label class="form-label d-block mb-3">Servicios adicionales</label><div class="row g-2"><div class="col-md-6" th:each="s : ${servicios}"><label class="option d-block"><input class="form-check-input me-2" type="checkbox" name="servicioIds" th:value="${s.id}"><span th:text="${s.nombre + ' — ₡' + s.precio}"></span></label></div></div></div><div class="col-12 d-flex gap-3 mt-3"><button class="btn-gold" type="submit"><i class="bi bi-calendar-check me-1"></i> Confirmar reserva</button><a class="btn-dark" th:href="@{/reservas}">Cancelar</a></div></form></main></body></html>

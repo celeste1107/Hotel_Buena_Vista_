@@ -113,4 +113,19 @@ public class ReservarService {
         reserva.setEstado("cancelada");
         reservaRepository.save(reserva);
     }
+
+    @Transactional
+    public void eliminarReserva(Long id) {
+        Reservas reserva = reservaRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("La reserva no existe."));
+
+        Habitacion habitacion = reserva.getHabitacion();
+
+        if (habitacion != null) {
+            habitacion.setEstado("disponible");
+            habitacionRepository.save(habitacion);
+        }
+
+        reservaRepository.delete(reserva);
+    }
 }

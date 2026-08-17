@@ -6,5 +6,3 @@ import jakarta.persistence.*; import java.time.LocalDateTime;
  @Column(nullable=false) private double total; private LocalDateTime fecha=LocalDateTime.now();
  public Factura(){} public Long getId(){return id;} public void setId(Long v){id=v;} public Reservas getReserva(){return reserva;} public void setReserva(Reservas v){reserva=v;} public double getTotal(){return total;} public void setTotal(double v){total=v;} public LocalDateTime getFecha(){return fecha;} public void setFecha(LocalDateTime v){fecha=v;}
 }
-
-

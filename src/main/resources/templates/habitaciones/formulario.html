@@ -1,16 +1,109 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head><meta charset="UTF-8"><title>Registrar habitación</title></head>
-<body>
-<h1>Registrar habitación</h1>
-<p th:if="${error}" th:text="${error}" style="color:red"></p>
-<form th:action="@{/habitaciones/guardar}" method="post" th:object="${habitacion}">
-<label>Número <input type="text" th:field="*{numero}" required></label><br>
-<label>Tipo <input type="text" th:field="*{tipo}" required></label><br>
-<label>Capacidad <input type="number" th:field="*{capacidad}" min="1" required></label><br>
-<label>Precio por noche <input type="number" step="0.01" th:field="*{precio}" min="0.01" required></label><br>
-<input type="hidden" th:field="*{estado}">
-<button type="submit">Guardar</button>
-<a th:href="@{/habitaciones}">Cancelar</a>
-</form>
-</body></html>
+    <head>
+        <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Hotel Buena Vista — Registrar habitación</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"><link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+        <style>
+            :root{
+                --gold:#c9a84c;
+                --ink:#0b0b0b;
+                --paper:#f7f3e8
+            }
+            body{
+                min-height:100vh;
+                background:radial-gradient(circle at 80% 0,#2c2618,transparent 34%),var(--ink);
+                color:var(--paper);
+                font-family:Georgia,serif
+            }
+            .bar{
+                padding:1.25rem 0;
+                border-bottom:1px solid rgba(201,168,76,.28)
+            }
+            .brand{
+                color:var(--gold);
+                text-decoration:none;
+                font-size:1.35rem;
+                letter-spacing:.07em
+            }
+            .brand em{
+                color:var(--paper)
+            }
+            .back{
+                color:var(--gold);
+                text-decoration:none;
+                font:.85rem Arial,sans-serif
+            }
+            .wrap{
+                max-width:830px;
+                padding:5rem 12px
+            }
+            .eyebrow,.form-label{
+                color:var(--gold);
+                font:700 .7rem Arial,sans-serif;
+                letter-spacing:.16em;
+                text-transform:uppercase
+            }
+            h1{
+                font-size:clamp(2.4rem,6vw,4.3rem)
+            }
+            h1 em{
+                color:var(--gold);
+                font-weight:normal
+            }
+            .card{
+                background:#181818;
+                border:1px solid rgba(201,168,76,.27);
+                padding:2rem
+            }
+            .form-control{
+                background:#101010;
+                border:1px solid rgba(255,255,255,.2);
+                color:var(--paper);
+                border-radius:0;
+                min-height:46px
+            }
+            .form-control:focus{
+                background:#101010;
+                color:var(--paper);
+                border-color:var(--gold);
+                box-shadow:0 0 0 .2rem rgba(201,168,76,.12)
+            }
+            .btn-gold,.btn-dark{
+                border-radius:0;
+                padding:.8rem 1rem;
+                font:700 .7rem Arial,sans-serif;
+                letter-spacing:.08em;
+                text-transform:uppercase
+            }
+            .btn-gold{
+                background:var(--gold);
+                border:1px solid var(--gold);
+                color:#111
+            }
+            .btn-dark{
+                background:transparent;
+                border:1px solid rgba(201,168,76,.6);
+                color:var(--gold);
+                text-decoration:none
+            }
+            .alert-error{
+                border:1px solid #a44c42;
+                color:#ffb1a6;
+                background:rgba(164,76,66,.12);
+                padding:.8rem 1rem
+            }
+        </style>
+    </head>
+    <body>
+        <header class="bar"><div class="container d-flex justify-content-between align-items-center"><a class="brand" th:href="@{/principal}">Hotel <em>Buena Vista</em></a><a class="back" th:href="@{/habitaciones}"><i class="bi bi-arrow-left"></i> Habitaciones</a></div></header>
+        <main class="container wrap"><p class="eyebrow">Inventario del hotel</p>
+            <h1>Registrar <em>habitación</em></h1><p class="text-white-50 mb-4">Agrega una nueva habitación al inventario del Hotel Buena Vista.
+            </p>
+            <div class="mb-4">
+                <a class="btn-dark" th:href="@{/huespedes/nuevo}">
+                    <i class="bi bi-person-plus me-1"></i> Agregar Huésped
+                </a>
+            </div>
+            <p th:if="${error}" class="alert-error" th:text="${error}"></p>
+            <form class="card row g-4" th:action="@{/habitaciones/guardar}" method="post" th:object="${habitacion}"><div class="col-md-6"><label class="form-label" for="numero">Número</label><input class="form-control" id="numero" type="text" th:field="*{numero}" placeholder="Ej. 101" required></div><div class="col-md-6"><label class="form-label" for="piso">Piso</label><input class="form-control" id="piso" type="number" th:field="*{piso}" min="1" placeholder="Ej. 1" required></div><div class="col-md-6"><label class="form-label" for="tipo">Tipo</label><input class="form-control" id="tipo" type="text" th:field="*{tipo}" placeholder="Ej. suite" required></div><div class="col-md-6"><label class="form-label" for="capacidad">Capacidad</label><input class="form-control" id="capacidad" type="number" th:field="*{capacidad}" min="1" placeholder="Número de huéspedes" required></div><div class="col-md-6"><label class="form-label" for="precio">Precio por noche</label><input class="form-control" id="precio" type="number" step="0.01" th:field="*{precio}" min="0.01" placeholder="0.00" required></div><input type="hidden" th:field="*{estado}"><div class="col-12 d-flex gap-3 mt-3"><button class="btn-gold" type="submit"><i class="bi bi-check2-circle me-1"></i> Guardar habitación</button><a class="btn-dark" th:href="@{/habitaciones}">Cancelar</a></div></form>
+        </main></body></html>

@@ -102,6 +102,17 @@ public class ReservaController {
         model.addAttribute("reservas", reservarService.listarReservas());
         return "reservas/listarReserva";
     }
+     @GetMapping("/eliminar/{id}")
+    public String eliminar (@PathVariable Long id, Model model) {
+        try {
+            reservarService.eliminarReserva(id);
+            model.addAttribute("mensaje", "Reserva eliminada correctamente");
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("error", e.getMessage());
+        }
+        model.addAttribute("reservas", reservarService.listarReservas());
+        return "reservas/listarReserva";
+    }
 
     @PostMapping("/disponibles")
     public String disponibles(@RequestParam LocalDate fechaEntrada,

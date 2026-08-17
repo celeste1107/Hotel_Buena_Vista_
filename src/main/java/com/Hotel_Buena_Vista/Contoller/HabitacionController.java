@@ -31,7 +31,7 @@ public class HabitacionController {
     public String cambiarEstado(@PathVariable Long id, @RequestParam String estado, Model model) {
         Habitacion h = repository.findById(id).orElse(null);
         if (h == null) { model.addAttribute("error", "La habitación no existe."); return listar(null, null, model); }
-        if (!java.util.List.of("disponible", "ocupada", "limpia", "mantenimiento", "reservada").contains(estado)) {
+        if (!java.util.List.of("disponible", "ocupada", "mantenimiento", "reservada").contains(estado)) {
             model.addAttribute("error", "Estado no válido."); return listar(null, null, model);
         }
         h.setEstado(estado); repository.save(h);
@@ -47,7 +47,7 @@ public class HabitacionController {
     @PostMapping("/guardar")
     public String guardar(@ModelAttribute Habitacion habitacion, Model model) {
         if (habitacion.getNumero() == null || habitacion.getNumero().isBlank()
-                || habitacion.getTipo() == null || habitacion.getTipo().isBlank()
+                || habitacion.getPiso() <= 0 || habitacion.getTipo() == null || habitacion.getTipo().isBlank()
                 || habitacion.getCapacidad() <= 0 || habitacion.getPrecio() <= 0) {
             model.addAttribute("error", "Datos incorrectos o incompletos.");
             return "habitaciones/formulario";

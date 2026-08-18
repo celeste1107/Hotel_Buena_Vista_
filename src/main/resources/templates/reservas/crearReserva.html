@@ -102,4 +102,217 @@
             color:#ffb1a6;
             background:rgba(164,76,66,.12);
             padding:.8rem 1rem
-        }</style></head><body><header class="bar"><div class="container d-flex justify-content-between align-items-center"><a class="brand" th:href="@{/principal}">Hotel <em>Buena Vista</em></a><a class="back" th:href="@{/reservas}"><i class="bi bi-arrow-left"></i> Reservas</a></div></header><main class="container wrap"><p class="eyebrow">Planifica tu estadía</p><h1>Crear <em>reserva</em></h1><p class="text-white-50 mb-4">Selecciona al huésped, las fechas, una habitación disponible y servicios opcionales.</p><p th:if="${error}" class="alert-error" th:text="${error}"></p><form class="card row g-4" th:action="@{/reservas/crear}" method="post"><div class="col-md-6"><label class="form-label" for="huespedId">Huésped</label><select class="form-select" id="huespedId" name="huespedId" required><option value="">Seleccione un huésped</option><option th:each="h : ${huespedes}" th:value="${h.id}" th:text="${h.nombre + ' ' + h.apellido}"></option></select></div><div class="col-md-6"><label class="form-label" for="habitacionId">Habitación</label><select class="form-select" id="habitacionId" name="habitacionId" required><option value="">Seleccione una habitación</option><option th:each="h : ${habitaciones}" th:value="${h.id}" th:text="${h.numero + ' — ' + h.tipo + ' — ₡' + h.precio}"></option></select></div><div class="col-md-6"><label class="form-label" for="fechaEntrada">Entrada</label><input class="form-control" id="fechaEntrada" type="date" name="fechaEntrada" th:value="${fechaEntrada}" required></div><div class="col-md-6"><label class="form-label" for="fechaSalida">Salida</label><input class="form-control" id="fechaSalida" type="date" name="fechaSalida" th:value="${fechaSalida}" required></div><div class="col-12"><label class="form-label d-block mb-3">Servicios adicionales</label><div class="row g-2"><div class="col-md-6" th:each="s : ${servicios}"><label class="option d-block"><input class="form-check-input me-2" type="checkbox" name="servicioIds" th:value="${s.id}"><span th:text="${s.nombre + ' — ₡' + s.precio}"></span></label></div></div></div><div class="col-12 d-flex gap-3 mt-3"><button class="btn-gold" type="submit"><i class="bi bi-calendar-check me-1"></i> Confirmar reserva</button><a class="btn-dark" th:href="@{/reservas}">Cancelar</a></div></form></main></body></html>
+        }
+        </style>
+</head>
+
+<body>
+
+    <header class="bar">
+        <div class="container d-flex justify-content-between align-items-center">
+
+            <a class="brand" th:href="@{/principal}">
+                Hotel <em>Buena Vista</em>
+            </a>
+
+            <a class="back" th:href="@{/reservas}">
+                <i class="bi bi-arrow-left"></i>
+                Reservas
+            </a>
+
+        </div>
+    </header>
+
+    <main class="container wrap">
+
+        <p class="eyebrow">
+            Planifica tu estadía
+        </p>
+
+        <h1>
+            Crear <em>reserva</em>
+        </h1>
+        <a class="btn-dark"
+           th:href="@{/huespedes/nuevo}"
+           style="padding:.45rem .7rem; font-size:.65rem;">
+
+            <i class="bi bi-person-plus me-1"></i>
+            Agregar huésped
+
+        </a>
+
+        <p class="text-white-50 mb-4">
+            Selecciona al huésped, las fechas, una habitación disponible y servicios opcionales.
+        </p>
+
+        <!-- Mensaje de error -->
+        <p
+            th:if="${error}"
+            class="alert-error"
+            th:text="${error}">
+        </p>
+
+        <!-- Formulario de creación de reserva -->
+        <form
+            class="card row g-4"
+            th:action="@{/reservas/crear}"
+            method="post">
+
+            <!-- Huésped -->
+            <div class="col-md-6">
+
+                <label
+                    class="form-label"
+                    for="huespedId">
+                    Huésped
+                </label>
+
+                <select
+                    class="form-select"
+                    id="huespedId"
+                    name="huespedId"
+                    required>
+
+                    <option value="">
+                        Seleccione un huésped
+                    </option>
+
+                    <option
+                        th:each="h : ${huespedes}"
+                        th:value="${h.id}"
+                        th:text="${h.nombre + ' ' + h.apellido}">
+                    </option>
+
+                </select>
+
+            </div>
+
+            <!-- Habitación -->
+            <div class="col-md-6">
+
+                <label
+                    class="form-label"
+                    for="habitacionId">
+                    Habitación
+                </label>
+
+                <select
+                    class="form-select"
+                    id="habitacionId"
+                    name="habitacionId"
+                    required>
+
+                    <option value="">
+                        Seleccione una habitación
+                    </option>
+
+                    <option
+                        th:each="h : ${habitaciones}"
+                        th:value="${h.id}"
+                        th:text="${h.numero + ' — ' + h.tipo + ' — ₡' + h.precio}">
+                    </option>
+
+                </select>
+
+            </div>
+
+            <!-- Fecha de entrada -->
+            <div class="col-md-6">
+
+                <label
+                    class="form-label"
+                    for="fechaEntrada">
+                    Entrada
+                </label>
+
+                <input
+                    class="form-control"
+                    id="fechaEntrada"
+                    type="date"
+                    name="fechaEntrada"
+                    th:value="${fechaEntrada}"
+                    required>
+
+            </div>
+
+            <!-- Fecha de salida -->
+            <div class="col-md-6">
+
+                <label
+                    class="form-label"
+                    for="fechaSalida">
+                    Salida
+                </label>
+
+                <input
+                    class="form-control"
+                    id="fechaSalida"
+                    type="date"
+                    name="fechaSalida"
+                    th:value="${fechaSalida}"
+                    required>
+
+            </div>
+
+            <!-- Servicios adicionales -->
+            <div class="col-12">
+
+                <label class="form-label d-block mb-3">
+                    Servicios adicionales
+                </label>
+
+                <div class="row g-2">
+
+                    <div
+                        class="col-md-6"
+                        th:each="s : ${servicios}">
+
+                        <label class="option d-block">
+
+                            <input
+                                class="form-check-input me-2"
+                                type="checkbox"
+                                name="servicioIds"
+                                th:value="${s.id}">
+
+                            <span
+                                th:text="${s.nombre + ' — ₡' + s.precio}">
+                            </span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Botones -->
+            <div class="col-12 d-flex gap-3 mt-3">
+
+                <button
+                    class="btn-gold"
+                    type="submit">
+
+                    <i class="bi bi-calendar-check me-1"></i>
+                    Confirmar reserva
+
+                </button>
+
+                <a
+                    class="btn-dark"
+                    th:href="@{/reservas}">
+
+                    Cancelar
+
+                </a>
+
+            </div>
+
+        </form>
+
+    </main>
+
+</body>
+
+</html>
